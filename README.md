@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 বাজার দর (BazarDor)
 
-## Getting Started
+আজকের বাজারের দাম এক নজরে — চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার বাজারভিত্তিক দাম, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
 
-First, run the development server:
+BazarDor is a responsive Bangla grocery price tracker built with Next.js (App Router), TypeScript and Better Auth.
+
+<div align="center">
+
+### 🌐 Explore BazarDor
+
+**আজকের বাজারদর, এক নজরে।**
+
+[![Live Demo](https://img.shields.io/badge/🚀_Explore_Live_Demo-16A34A?style=for-the-badge&logoColor=white)](https://assignment-7-bazardor.vercel.app/)
+
+</div>
+
+## Technologies
+
+- **Next.js 16** (App Router, Server Components) + **TypeScript**
+- **Tailwind CSS v4**, Noto_Sans_Bengali (Bengali) via `next/font`
+- **Better Auth** with the **MongoDB adapter** — email/password, Google, GitHub
+- **react-hot-toast** for notifications, **lucide-react** for icons
+- Deployed on **Vercel**
+
+## Features
+
+1. **Live price ticker** — infinite marquee under the navbar with emoji, name, price/unit and ▲/▼ change.
+2. **Top movers** — the 6 biggest risers and 6 biggest fallers of the day, plus the full product grid with a smooth-scroll hero CTA.
+3. **Category pages** — active-link navbar, skeleton loading, empty/404 states and a numeric **sort dropdown** (Bengali-digit safe).
+4. **Protected product details** — min / max / average price and a market-by-market table (sorted by average).
+5. **Authentication** — sign in / sign up, Google & GitHub login, validation + toast feedback, protected-route redirects (middleware + server check).
+6. **Profile & update info** — view your account and change your name on a separate route.
+7. **Fully responsive** — mobile, tablet and desktop; custom 404 page; refresh-safe dynamic routes on Vercel.
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # fill in MongoDB + OAuth keys
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+OAuth callback URLs: `{BETTER_AUTH_URL}/api/auth/callback/google` and `/api/auth/callback/github`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/            routes: (site) home, category, product, profile · (auth) signin, signup · api/auth
+  components/     layout · home · category · product · auth · profile · ui
+  lib/            api client, auth, session guard, formatting helpers
+  middleware.ts   cookie gate for /product and /profile
+```
 
-## Learn More
+## Deploy (Vercel)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Add every variable from `.env.example` in Vercel, set `BETTER_AUTH_URL` to your production URL, and add the production callback URLs in your Google/GitHub OAuth apps.
